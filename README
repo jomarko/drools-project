@@ -2,8 +2,6 @@ The Drools application for JON BxMS Plugin testing.
 
 1) Install jon-server and jon-plugin-pack-brms-bpms with Postgresql 9.x
 2) Checkout BxMS version you are testing and go to directory drools-project
-3) Edit pom.xml and change <brms.version/> to appropriate version from brms.cfg [drools] section.
+3) Edit pom.xml and change <brms.version/> to appropriate version.
 4) run: mvn clean install exec:exec
 5) Go to JON and inventory the Drools application
-6) Set credentials in Configuration tab to admin/admin
-7) Go through testing scenario
