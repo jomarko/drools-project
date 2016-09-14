@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="_Integer" structureRef="Integer"/>
+  <bpmn2:itemDefinition id="_ItemDefinition_339" structureRef="org.kie.api.runtime.process.WorkflowProcessInstance"/>
+  <bpmn2:process id="com.redhat.process" tns:version="1" tns:packageName="com.redhat" tns:adHoc="false" name="Test process" isExecutable="true" processType="Private">
+    <bpmn2:extensionElements>
+      <tns:import name="org.kie.api.runtime.process.WorkflowProcessInstance"/>
+    </bpmn2:extensionElements>
+    <bpmn2:property id="round" itemSubjectRef="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#_Integer"/>
+    <bpmn2:startEvent id="_1" name="">
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:scriptTask id="ScriptTask_1" name="starting" scriptFormat="http://www.java.com/java">
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_9</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;Starting process #&quot; + round);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" tns:priority="1" sourceRef="_1" targetRef="ScriptTask_1"/>
+    <bpmn2:intermediateCatchEvent id="IntermediateCatchEvent_1" name="">
+      <bpmn2:incoming>SequenceFlow_9</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_10</bpmn2:outgoing>
+      <bpmn2:timerEventDefinition id="TimerEventDefinition_1">
+        <bpmn2:timeDuration xsi:type="bpmn2:tFormalExpression" id="FormalExpression_1" language="http://www.mvel.org/2.0">10s</bpmn2:timeDuration>
+      </bpmn2:timerEventDefinition>
+    </bpmn2:intermediateCatchEvent>
+    <bpmn2:scriptTask id="ScriptTask_2" name="finished" scriptFormat="http://www.java.com/java">
+      <bpmn2:incoming>SequenceFlow_10</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_7</bpmn2:outgoing>
+      <bpmn2:script>System.out.println(&quot;Finished process #&quot; + round);</bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:sequenceFlow id="SequenceFlow_7" tns:priority="1" name="" sourceRef="ScriptTask_2" targetRef="EndEvent_1"/>
+    <bpmn2:endEvent id="EndEvent_1" name="">
+      <bpmn2:incoming>SequenceFlow_7</bpmn2:incoming>
+      <bpmn2:terminateEventDefinition id="TerminateEventDefinition_1"/>
+    </bpmn2:endEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_9" tns:priority="1" name="" sourceRef="ScriptTask_1" targetRef="IntermediateCatchEvent_1"/>
+    <bpmn2:sequenceFlow id="SequenceFlow_10" tns:priority="1" name="" sourceRef="IntermediateCatchEvent_1" targetRef="ScriptTask_2"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1" name="Test process">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#com.redhat.process">
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#_1">
+        <dc:Bounds height="36.0" width="36.0" x="100.0" y="150.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_1" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#ScriptTask_1">
+        <dc:Bounds height="50.0" width="110.0" x="241.0" y="143.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_IntermediateCatchEvent_1" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#IntermediateCatchEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="544.0" y="150.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#EndEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="950.0" y="150.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ScriptTask_2" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#ScriptTask_2">
+        <dc:Bounds height="50.0" width="110.0" x="770.0" y="143.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#SequenceFlow_1" sourceElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#BPMNShape_StartEvent_1" targetElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#BPMNShape_ScriptTask_1">
+        <di:waypoint xsi:type="dc:Point" x="136.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="183.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="183.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="241.0" y="168.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_7" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#SequenceFlow_7" sourceElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#BPMNShape_ScriptTask_2" targetElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#BPMNShape_EndEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="880.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="911.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="911.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="950.0" y="168.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_9" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#SequenceFlow_9" sourceElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#BPMNShape_ScriptTask_1" targetElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#BPMNShape_IntermediateCatchEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="351.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="437.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="437.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="544.0" y="168.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_10" bpmnElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#SequenceFlow_10" sourceElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#BPMNShape_IntermediateCatchEvent_1" targetElement="platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#BPMNShape_ScriptTask_2">
+        <di:waypoint xsi:type="dc:Point" x="580.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="665.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="665.0" y="168.0"/>
+        <di:waypoint xsi:type="dc:Point" x="770.0" y="168.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="Relationship_1" type="Simulation">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario xsi:type="bpsim:Scenario" id="Scenario_1" name="Scenario 1">
+          <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters" baseTimeUnit="ms"/>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_1" id="ElementParameters_1">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:WaitTime xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="1.0"/>
+              </bpsim:WaitTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="ScriptTask_1" id="ElementParameters_2">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="0.0" min="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_1" id="ElementParameters_3">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="IntermediateCatchEvent_1" id="ElementParameters_5">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:WaitTime xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="1.0"/>
+              </bpsim:WaitTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="EndEvent_1" id="ElementParameters_8">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="1.0" min="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="ScriptTask_2" id="ElementParameters_11">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:UniformDistribution max="1.0" min="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_7" id="ElementParameters_12">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_9" id="ElementParameters_15">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="SequenceFlow_10" id="ElementParameters_16">
+            <bpsim:ControlParameters xsi:type="bpsim:ControlParameters">
+              <bpsim:Probability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="100.0"/>
+              </bpsim:Probability>
+            </bpsim:ControlParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#Definition</bpmn2:source>
+    <bpmn2:target>platform:/resource/drools-project/src/main/resources/com/redhat/process.bpmn2#Definition</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>

@@ -1,0 +1,44 @@
+package com.redhat
+
+global Integer maximum
+
+declare logicalObject
+    original : NumberHolder
+end
+
+rule "print notification"
+    when
+        NumberHolder( $i: value )
+    then
+        System.out.println("Turn #" + $i + " " + (maximum - $i) + " remaining");
+end
+/*
+rule "print warning before end"
+    when
+        NumberHolder( (maximum - value) < 60 )
+    then
+        System.out.println("WARN: The program will end soon!");
+end
+*/
+rule "cleanup NumberHolder after 1 minute"
+    timer(int: 1m 0)
+    when
+        $holder: NumberHolder( )
+    then
+        retract($holder);
+end
+
+rule "cleanup Strings"
+    timer(int: 1m 0)
+    when
+        $bomb: String()
+    then
+        retract($bomb);
+end
+
+rule "insert logical object"
+    when
+        $holder: NumberHolder( )
+    then
+        insertLogical(new logicalObject($holder));
+end
