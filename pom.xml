@@ -5,7 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
 
   <properties>
-    <brms.version>6.5.0-SNAPSHOT</brms.version>
+    <brms.version>6.4.0.Final-redhat-10</brms.version>
   </properties>
 
   <dependencies>
@@ -31,10 +31,10 @@
         <configuration>
           <executable>java</executable>
           <arguments>
-	    <argument>-Dcom.sun.management.jmxremote</argument>
             <argument>-Dcom.sun.management.jmxremote.port=3999</argument>
             <argument>-Dcom.sun.management.jmxremote.authenticate=false</argument>
             <argument>-Dcom.sun.management.jmxremote.ssl=false</argument>
+            <argument>-Ddrools.mbeans=enabled</argument>
             <argument>-Dkie.mbeans=enabled</argument>
 	    <argument>-classpath</argument>
             <classpath/>
@@ -47,16 +47,17 @@
 
   <repositories>
     <repository>
-      <id>jboss-public-repository-group</id>
-      <name>JBoss Public Repository Group</name>
-      <url>http://repository.jboss.org/nexus/content/groups/public/</url>
+      <id>mead-repository-6.4</id>
+      <name>BRMS/BPMS 6.4 Private MEAD Repository</name>
+      <url>http://download.lab.bos.redhat.com/brewroot/repos/jb-bxms-6.4-build/latest/maven/</url>
+      <layout>default</layout>
       <releases>
         <enabled>true</enabled>
         <updatePolicy>never</updatePolicy>
       </releases>
       <snapshots>
-        <enabled>true</enabled>
-        <updatePolicy>daily</updatePolicy>
+        <enabled>false</enabled>
+        <updatePolicy>never</updatePolicy>
       </snapshots>
     </repository>
   </repositories>
